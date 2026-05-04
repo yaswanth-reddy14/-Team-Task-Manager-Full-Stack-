@@ -1,0 +1,10 @@
+{
+  "name": "Team Task Manager",
+  "description": "Full-stack web app for team task management with role-based access",
+  "keywords": ["task", "manager", "team", "project", "express", "react", "postgresql"],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

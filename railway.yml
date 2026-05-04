@@ -1,0 +1,24 @@
+version: '3'
+services:
+  - type: mongodb
+    name: task-manager-db
+  - type: web
+    name: task-manager-api
+    runtime: node
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: ${{ secrets.JWT_SECRET }}
+      - key: DATABASE_URL
+        value: ${{ task-manager-db.DATABASE_URL }}
+      - key: PORT
+        value: ${{ PORT }}
+  - type: web
+    name: task-manager-frontend
+    runtime: node
+    startCommand: npm start
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://${{ RAILWAY_API_DOMAIN }}
