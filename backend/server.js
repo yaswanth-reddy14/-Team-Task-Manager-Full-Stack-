@@ -9,19 +9,56 @@ const taskRoutes = require('./routes/tasks');
 
 const app = express();
 const databaseUrl = process.env.DATABASE_URL || process.env.MONGODB_URI || process.env.MONGO_URL;
+let databaseConnectionPromise = null;
+
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const connectDatabase = async () => {
+  if (!databaseUrl) {
+    throw new Error('Missing DATABASE_URL, MONGODB_URI, or MONGO_URL environment variable');
+  }
+
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
+
+  if (!databaseConnectionPromise) {
+    mongoose.set('bufferCommands', false);
+    databaseConnectionPromise = mongoose.connect(databaseUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 10000,
+    });
+  }
+
+  await databaseConnectionPromise;
+};
 
 // Middleware
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json());
 
-// MongoDB Connection
-if (!databaseUrl) {
-  console.error('Missing DATABASE_URL, MONGODB_URI, or MONGO_URL environment variable');
-  process.exit(1);
-}
+app.use(async (req, res, next) => {
+  try {
+    await connectDatabase();
+    next();
+  } catch (error) {
+    console.error('MongoDB connection error:', error.message);
+    res.status(500).json({ error: 'Database connection error' });
+  }
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -43,13 +80,7 @@ const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    mongoose.set('bufferCommands', false);
-
-    await mongoose.connect(databaseUrl, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 10000,
-    });
+    await connectDatabase();
 
     console.log('MongoDB connected successfully');
     app.listen(PORT, () => {
@@ -64,4 +95,8 @@ const startServer = async () => {
   }
 };
 
-startServer();
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = app;
