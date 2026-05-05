@@ -334,7 +334,7 @@ Use cURL, Postman, or similar tools with the API endpoints documented above.
 Example with cURL:
 ```bash
 # Register
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"username":"testuser","email":"test@test.com","password":"pass123"}'
 ```

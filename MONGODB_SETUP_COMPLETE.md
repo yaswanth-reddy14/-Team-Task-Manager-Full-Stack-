@@ -3,7 +3,7 @@
 ## ✅ What's Running
 
 ### Backend (Express + Mongoose + MongoDB)
-- **URL**: http://localhost:5000
+- **URL**: https://team-task-manager-full-stack-3.onrender.com
 - **Status**: ✅ Running
 - **Database**: MongoDB (Cloud - MongoDB Atlas)
 - **Command to start**: `cd backend && npm run dev`
@@ -117,7 +117,7 @@ CORS_ORIGIN=http://localhost:3000
 
 ### Frontend (.env)
 ```
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=https://team-task-manager-full-stack-3.onrender.com
 ```
 
 ---

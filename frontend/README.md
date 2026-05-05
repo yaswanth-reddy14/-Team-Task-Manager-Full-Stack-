@@ -118,7 +118,7 @@ Components wrapped in `<ProtectedRoute>` require authentication:
 ### Environment Variables
 
 ```
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=https://team-task-manager-full-stack-3.onrender.com
 ```
 
 ## 🎯 Pages

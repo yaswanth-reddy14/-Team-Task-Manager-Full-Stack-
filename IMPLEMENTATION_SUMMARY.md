@@ -240,7 +240,7 @@ npm start
 
 ### Step 5: Access Application
 - **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:5000
+- **Backend API**: https://team-task-manager-full-stack-3.onrender.com
 
 ---
 

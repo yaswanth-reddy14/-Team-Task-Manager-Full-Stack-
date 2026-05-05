@@ -9,7 +9,7 @@ echo ""
 if ! command -v tmux &> /dev/null; then
     echo "⚠️  tmux not found. Starting services sequentially."
     echo ""
-    echo "📌 Backend (http://localhost:5000)"
+    echo "📌 Backend (https://team-task-manager-full-stack-3.onrender.com)"
     cd backend
     npm run dev &
     BACKEND_PID=$!
@@ -45,7 +45,7 @@ else
     echo "✅ Services started in tmux session 'taskmanager'"
     echo ""
     echo "📌 Attach to session: tmux attach -t taskmanager"
-    echo "📌 Backend (http://localhost:5000)"
+    echo "📌 Backend (https://team-task-manager-full-stack-3.onrender.com)"
     echo "📌 Frontend (http://localhost:3000)"
     
     tmux attach -t taskmanager

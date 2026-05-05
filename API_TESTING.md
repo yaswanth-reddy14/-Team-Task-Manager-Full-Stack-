@@ -21,7 +21,7 @@ All protected endpoints require a JWT token in the Authorization header.
 
 #### 1.1 Register New User
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -48,7 +48,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 
 #### 1.2 Login
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -73,7 +73,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 
 #### 1.3 Get Profile
 ```bash
-curl -X GET http://localhost:5000/api/auth/profile \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/auth/profile \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
@@ -95,7 +95,7 @@ curl -X GET http://localhost:5000/api/auth/profile \
 
 #### 2.1 Create Project
 ```bash
-curl -X POST http://localhost:5000/api/projects \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/projects \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d '{
@@ -118,7 +118,7 @@ curl -X POST http://localhost:5000/api/projects \
 
 #### 2.2 List All Projects
 ```bash
-curl -X GET http://localhost:5000/api/projects \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/projects \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -137,7 +137,7 @@ curl -X GET http://localhost:5000/api/projects \
 
 #### 2.3 Get Project Details
 ```bash
-curl -X GET http://localhost:5000/api/projects/1 \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/projects/1 \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -154,7 +154,7 @@ curl -X GET http://localhost:5000/api/projects/1 \
 
 #### 2.4 Update Project
 ```bash
-curl -X PUT http://localhost:5000/api/projects/1 \
+curl -X PUT https://team-task-manager-full-stack-3.onrender.com/api/projects/1 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d '{
@@ -176,7 +176,7 @@ curl -X PUT http://localhost:5000/api/projects/1 \
 
 #### 2.5 Delete Project
 ```bash
-curl -X DELETE http://localhost:5000/api/projects/1 \
+curl -X DELETE https://team-task-manager-full-stack-3.onrender.com/api/projects/1 \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -196,7 +196,7 @@ curl -X DELETE http://localhost:5000/api/projects/1 \
 First, create or get another user's ID. Register another user and get their ID.
 
 ```bash
-curl -X POST http://localhost:5000/api/projects/1/members \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/projects/1/members \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d '{
@@ -218,7 +218,7 @@ curl -X POST http://localhost:5000/api/projects/1/members \
 
 #### 3.2 List Project Members
 ```bash
-curl -X GET http://localhost:5000/api/projects/1/members \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/projects/1/members \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -239,7 +239,7 @@ curl -X GET http://localhost:5000/api/projects/1/members \
 
 #### 3.3 Remove Project Member
 ```bash
-curl -X DELETE http://localhost:5000/api/projects/1/members/2 \
+curl -X DELETE https://team-task-manager-full-stack-3.onrender.com/api/projects/1/members/2 \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -256,7 +256,7 @@ curl -X DELETE http://localhost:5000/api/projects/1/members/2 \
 
 #### 4.1 Create Task
 ```bash
-curl -X POST http://localhost:5000/api/tasks/1 \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/tasks/1 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d '{
@@ -288,7 +288,7 @@ curl -X POST http://localhost:5000/api/tasks/1 \
 
 #### 4.2 List Tasks
 ```bash
-curl -X GET http://localhost:5000/api/tasks/1 \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/tasks/1 \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -315,19 +315,19 @@ curl -X GET http://localhost:5000/api/tasks/1 \
 
 #### 4.3 Filter Tasks by Status
 ```bash
-curl -X GET "http://localhost:5000/api/tasks/1?status=In%20Progress" \
+curl -X GET "https://team-task-manager-full-stack-3.onrender.com/api/tasks/1?status=In%20Progress" \
   -H "Authorization: Bearer TOKEN"
 ```
 
 #### 4.4 Filter Tasks by Assignee
 ```bash
-curl -X GET "http://localhost:5000/api/tasks/1?assigned_to=2" \
+curl -X GET "https://team-task-manager-full-stack-3.onrender.com/api/tasks/1?assigned_to=2" \
   -H "Authorization: Bearer TOKEN"
 ```
 
 #### 4.5 Get Task Details
 ```bash
-curl -X GET http://localhost:5000/api/tasks/task/1 \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/tasks/task/1 \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -352,7 +352,7 @@ curl -X GET http://localhost:5000/api/tasks/task/1 \
 
 #### 4.6 Update Task
 ```bash
-curl -X PUT http://localhost:5000/api/tasks/task/1 \
+curl -X PUT https://team-task-manager-full-stack-3.onrender.com/api/tasks/task/1 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d '{
@@ -379,7 +379,7 @@ curl -X PUT http://localhost:5000/api/tasks/task/1 \
 
 #### 4.7 Update Task Status Only
 ```bash
-curl -X PUT http://localhost:5000/api/tasks/task/1 \
+curl -X PUT https://team-task-manager-full-stack-3.onrender.com/api/tasks/task/1 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d '{
@@ -389,7 +389,7 @@ curl -X PUT http://localhost:5000/api/tasks/task/1 \
 
 #### 4.8 Delete Task
 ```bash
-curl -X DELETE http://localhost:5000/api/tasks/task/1 \
+curl -X DELETE https://team-task-manager-full-stack-3.onrender.com/api/tasks/task/1 \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -406,7 +406,7 @@ curl -X DELETE http://localhost:5000/api/tasks/task/1 \
 
 #### 5.1 Get Dashboard Stats
 ```bash
-curl -X GET http://localhost:5000/api/tasks/dashboard/stats \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/tasks/dashboard/stats \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -446,13 +446,13 @@ Save your token to reuse in multiple requests:
 
 ```bash
 # Get token
-TOKEN=$(curl -s -X POST http://localhost:5000/api/auth/login \
+TOKEN=$(curl -s -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"password123"}' \
   | jq -r '.token')
 
 # Use token in requests
-curl -X GET http://localhost:5000/api/projects \
+curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/projects \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -512,7 +512,7 @@ curl -X GET http://localhost:5000/api/projects \
 
 Create a collection with these variables:
 ```
-{{base_url}} = http://localhost:5000
+{{base_url}} = https://team-task-manager-full-stack-3.onrender.com
 {{token}} = <your_jwt_token>
 {{project_id}} = 1
 {{task_id}} = 1
@@ -559,7 +559,7 @@ Test with multiple requests:
 ```bash
 # 10 parallel requests
 for i in {1..10}; do
-  curl -X GET http://localhost:5000/api/projects \
+  curl -X GET https://team-task-manager-full-stack-3.onrender.com/api/projects \
     -H "Authorization: Bearer TOKEN" &
 done
 
@@ -582,7 +582,7 @@ POST /api/tasks/1 201 23.456 ms
 
 Enable debug mode in cURL:
 ```bash
-curl -v -X GET http://localhost:5000/api/projects \
+curl -v -X GET https://team-task-manager-full-stack-3.onrender.com/api/projects \
   -H "Authorization: Bearer TOKEN"
 ```
 

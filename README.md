@@ -98,7 +98,7 @@ docker-compose exec backend npm run migrate
 
 # Access
 # Frontend: http://localhost:3000
-# API: http://localhost:5000
+# API: https://team-task-manager-full-stack-3.onrender.com
 # Database: localhost:27017
 ```
 
@@ -232,7 +232,7 @@ docker-compose exec backend npm run migrate
 
 ```bash
 # Register
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -241,7 +241,7 @@ curl -X POST http://localhost:5000/api/auth/register \
   }'
 
 # Login
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -249,7 +249,7 @@ curl -X POST http://localhost:5000/api/auth/login \
   }'
 
 # Create Project (replace TOKEN with actual token)
-curl -X POST http://localhost:5000/api/projects \
+curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/projects \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d '{

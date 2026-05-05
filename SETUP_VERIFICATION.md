@@ -63,7 +63,7 @@ Use this checklist to verify that your Team Task Manager is properly set up.
 ## ✅ API Testing
 
 ### Health Check
-- [ ] Backend health endpoint works: `curl http://localhost:5000/api/health`
+- [ ] Backend health endpoint works: `curl https://team-task-manager-full-stack-3.onrender.com/api/health`
 - [ ] Returns `{"status": "Server is running"}`
 
 ### Authentication

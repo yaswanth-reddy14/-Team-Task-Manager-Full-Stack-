@@ -81,7 +81,7 @@ echo 🔧 Next Steps:
 echo 1. Configure database in backend\.env
 echo 2. Start backend: cd backend ^&^& npm run dev
 echo 3. In another terminal, start frontend: cd frontend ^&^& npm start
-echo 4. Open http://localhost:3000 in your browser
+echo 4. Open https://team-task-manager-full-stack-3.onrender.com in your browser
 echo.
 echo 📚 For more details, see README.md
 echo.

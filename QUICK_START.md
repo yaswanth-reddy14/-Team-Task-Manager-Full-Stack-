@@ -65,8 +65,8 @@ npm start
 ## 🌐 Access the Application
 
 - **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:5000
-- **API Health Check**: http://localhost:5000/api/health
+- **Backend API**: https://team-task-manager-full-stack-3.onrender.com
+- **API Health Check**: https://team-task-manager-full-stack-3.onrender.com/api/health
 
 ## 👤 Create Your First Account
 

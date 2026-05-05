@@ -173,7 +173,7 @@ cd frontend && npm start
 ### Step 3: Access Application
 ```
 Frontend: http://localhost:3000
-Backend:  http://localhost:5000
+Backend:  https://team-task-manager-full-stack-3.onrender.com
 ```
 
 **That's it! Your app is running!** 🎉
