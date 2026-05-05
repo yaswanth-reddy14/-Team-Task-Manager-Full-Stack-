@@ -17,6 +17,7 @@ const ProjectDetail = () => {
   const [success, setSuccess] = useState('');
   const [activeTab, setActiveTab] = useState('tasks');
   const [showTaskForm, setShowTaskForm] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
   const [taskToDelete, setTaskToDelete] = useState(null);
   const [memberToRemove, setMemberToRemove] = useState(null);
   const [taskData, setTaskData] = useState({
@@ -55,29 +56,82 @@ const ProjectDetail = () => {
     }
   }, [fetchData, projectId]);
 
-  const handleCreateTask = async (e) => {
+  const emptyTaskData = {
+    title: '',
+    description: '',
+    priority: 'Medium',
+    assigned_to: '',
+    due_date: '',
+  };
+
+  const formatDateForInput = (dateValue) => {
+    if (!dateValue) return '';
+
+    const date = new Date(dateValue);
+    if (Number.isNaN(date.getTime())) return '';
+
+    const timezoneOffset = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - timezoneOffset).toISOString().slice(0, 16);
+  };
+
+  const resetTaskForm = () => {
+    setTaskData(emptyTaskData);
+    setEditingTask(null);
+    setShowTaskForm(false);
+  };
+
+  const handleStartCreateTask = () => {
+    setTaskData(emptyTaskData);
+    setEditingTask(null);
+    setShowTaskForm(true);
+  };
+
+  const handleStartEditTask = (task) => {
+    const taskId = task._id || task.id;
+    setTaskData({
+      title: task.title || '',
+      description: task.description || '',
+      priority: task.priority || 'Medium',
+      assigned_to: task.assigned_to?._id || task.assigned_to?.id || task.assigned_to || '',
+      due_date: formatDateForInput(task.due_date),
+    });
+    setEditingTask({ id: taskId, title: task.title });
+    setShowTaskForm(true);
+  };
+
+  const handleSubmitTask = async (e) => {
     e.preventDefault();
     try {
-      await taskAPI.createTask(projectId, taskData);
-      setTaskData({ title: '', description: '', priority: 'Medium', assigned_to: '', due_date: '' });
-      setShowTaskForm(false);
-      setSuccess('Task created successfully.');
+      if (editingTask) {
+        await taskAPI.updateTask(editingTask.id, taskData);
+        setSuccess('Task updated successfully.');
+      } else {
+        await taskAPI.createTask(projectId, taskData);
+        setSuccess('Task created successfully.');
+      }
+
+      resetTaskForm();
       fetchData();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to create task');
+      setError(err.response?.data?.error || `Failed to ${editingTask ? 'update' : 'create'} task`);
     }
   };
 
   const handleDeleteTask = async () => {
     if (!taskToDelete) return;
 
+    const deleteTarget = taskToDelete;
+    setTaskToDelete(null);
+
     try {
-      await taskAPI.deleteTask(taskToDelete.id);
+      await taskAPI.deleteTask(deleteTarget.id);
       setSuccess('Task deleted successfully.');
-      setTaskToDelete(null);
+      if (editingTask?.id === deleteTarget.id) {
+        resetTaskForm();
+      }
       fetchData();
     } catch (err) {
-      setError('Failed to delete task');
+      setError(err.response?.data?.error || 'Failed to delete task');
     }
   };
 
@@ -137,7 +191,7 @@ const ProjectDetail = () => {
           <p className="page-subtitle">{project.description || 'No description added.'}</p>
         </div>
         {activeTab === 'tasks' && !showTaskForm && (
-          <button onClick={() => setShowTaskForm(true)} className="btn btn-primary">
+          <button onClick={handleStartCreateTask} className="btn btn-primary">
             New Task
           </button>
         )}
@@ -165,14 +219,14 @@ const ProjectDetail = () => {
               <div className="empty-state">
                 <h2>No tasks yet</h2>
                 <p>Create a task, assign it to a member, and track the work from here.</p>
-                <button onClick={() => setShowTaskForm(true)} className="btn btn-primary">
+                <button onClick={handleStartCreateTask} className="btn btn-primary">
                   Create Task
                 </button>
               </div>
             )
           ) : (
-            <form onSubmit={handleCreateTask} className="form">
-              <h2>Create Task</h2>
+            <form onSubmit={handleSubmitTask} className="form">
+              <h2>{editingTask ? 'Edit Task' : 'Create Task'}</h2>
               <input
                 type="text"
                 placeholder="Task Title"
@@ -209,10 +263,12 @@ const ProjectDetail = () => {
                 value={taskData.due_date}
                 onChange={(e) => setTaskData({ ...taskData, due_date: e.target.value })}
               />
-              <button type="submit" className="btn btn-primary">Create Task</button>
+              <button type="submit" className="btn btn-primary">
+                {editingTask ? 'Save Changes' : 'Create Task'}
+              </button>
               <button
                 type="button"
-                onClick={() => setShowTaskForm(false)}
+                onClick={resetTaskForm}
                 className="btn btn-secondary"
               >
                 Cancel
@@ -238,6 +294,12 @@ const ProjectDetail = () => {
                     <option value="Completed">Completed</option>
                   </select>
                 </div>
+                <button
+                  onClick={() => handleStartEditTask(task)}
+                  className="btn btn-small btn-secondary"
+                >
+                  Edit
+                </button>
                 <button
                   onClick={() => setTaskToDelete({ id: task._id || task.id, title: task.title })}
                   className="btn btn-small btn-danger"
