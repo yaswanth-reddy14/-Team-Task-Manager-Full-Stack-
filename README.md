@@ -1,37 +1,23 @@
-# Team Task Manager - Full Stack Web Application
+# Team Task Manager
 
-## Project Title
+Team Task Manager is a full-stack web application for managing team projects and tasks. Users can register, log in, create projects, add team members, assign tasks, update task status, and track progress through a dashboard.
 
-Team Task Manager
+## Live Links
 
-## Project Description
-
-Team Task Manager is a full-stack web application built for managing team projects and tasks. It allows users to register, log in, create projects, add team members, assign tasks, update task status, and track progress using a dashboard.
-
-The application includes secure authentication, protected routes, project management, team member management, task assignment, and dashboard statistics.
-
-## Live Backend URL
-
-https://team-task-manager-full-stack-3.onrender.com
-
-## Live Frontend URL
-
-Frontend URL will be added after frontend deployment.
-
-## GitHub Repository
-
-https://github.com/yaswanth-reddy14/-Team-Task-Manager-Full-Stack-
+- Backend: https://team-task-manager-full-stack-3.onrender.com
+- Frontend: https://team-task-manager-full-stack-4.onrender.com/
+- Repository: https://github.com/yaswanth-reddy14/-Team-Task-Manager-Full-Stack-
 
 ## Tech Stack
 
-### Frontend
+**Frontend**
 
 - React.js
 - React Router
 - Axios
 - CSS
 
-### Backend
+**Backend**
 
 - Node.js
 - Express.js
@@ -42,154 +28,171 @@ https://github.com/yaswanth-reddy14/-Team-Task-Manager-Full-Stack-
 - Joi Validation
 - CORS
 
-### Deployment
+**Deployment**
 
-- Backend deployed on Render
-- Frontend can be deployed on Render Static Site
-- Database hosted using MongoDB Atlas
+- Render
+- MongoDB Atlas
 
-## Main Features
+## Features
 
-- User registration
-- User login
+- User registration and login
 - JWT-based authentication
 - Protected frontend routes
-- Create projects
-- View project list
-- Edit and delete projects
+- Create, view, edit, and delete projects
 - Add registered users as project members
-- Create tasks inside projects
-- Assign tasks to team members
+- Role-based project access
+- Create, assign, update, and delete tasks
+- Set task priority and due date
 - Update task status
-- Set task priority
 - Track overdue tasks
 - Dashboard statistics
-- Role-based project access
 
-## API Base URL
+## Project Structure
 
-https://team-task-manager-full-stack-3.onrender.com
-
-## Important API Endpoints
-
-### Authentication
-
-- POST /api/auth/register
-- POST /api/auth/login
-- GET /api/auth/profile
-
-### Projects
-
-- GET /api/projects
-- POST /api/projects
-- GET /api/projects/:projectId
-- PUT /api/projects/:projectId
-- DELETE /api/projects/:projectId
-
-### Project Members
-
-- GET /api/projects/:projectId/members
-- POST /api/projects/:projectId/members
-- DELETE /api/projects/:projectId/members/:memberId
-
-### Tasks
-
-- GET /api/tasks/:projectId
-- POST /api/tasks/:projectId
-- GET /api/tasks/task/:taskId
-- PUT /api/tasks/task/:taskId
-- DELETE /api/tasks/task/:taskId
-- GET /api/tasks/dashboard/stats
+```text
+Team-Task-Manager/
+|-- backend/
+|   |-- config/
+|   |-- controllers/
+|   |-- middleware/
+|   |-- models/
+|   |-- routes/
+|   |-- server.js
+|   `-- package.json
+|-- frontend/
+|   |-- public/
+|   |-- src/
+|   |   |-- components/
+|   |   |-- context/
+|   |   |-- pages/
+|   |   |-- styles/
+|   |   |-- api.js
+|   |   `-- App.js
+|   `-- package.json
+`-- README.md
+```
 
 ## Environment Variables
 
 ### Backend
 
-NODE_ENV=production
+Create a `.env` file inside the `backend` folder.
+
+```env
+NODE_ENV=development
 PORT=5000
 DATABASE_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRE=7d
-CORS_ORIGIN=your_frontend_url
+CORS_ORIGIN=http://localhost:3000
+```
 
 ### Frontend
 
-REACT_APP_API_URL=https://team-task-manager-full-stack-3.onrender.com
+Create a `.env` file inside the `frontend` folder.
 
-## Local Setup Instructions
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
 
-### Backend Setup
+For production, set `REACT_APP_API_URL` to the deployed backend URL.
 
-1. Open the backend folder.
-2. Install dependencies:
+## Local Setup
 
-   npm install
+### Backend
 
-3. Create a .env file with the required backend environment variables.
-4. Start the backend:
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-   npm run dev
+Backend runs on:
 
-Backend runs locally on:
-
+```text
 http://localhost:5000
+```
 
-### Frontend Setup
+### Frontend
 
-1. Open the frontend folder.
-2. Install dependencies:
+```bash
+cd frontend
+npm install
+npm start
+```
 
-   npm install
+Frontend runs on:
 
-3. Create a .env file:
-
-   REACT_APP_API_URL=http://localhost:5000
-
-4. Start the frontend:
-
-   npm start
-
-Frontend runs locally on:
-
+```text
 http://localhost:3000
+```
 
-## Deployment Details
+## API Endpoints
 
-The backend is deployed on Render as a Web Service.
+### Authentication
 
-Backend deployment URL:
+```text
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/profile
+```
 
-https://team-task-manager-full-stack-3.onrender.com
+### Projects
 
-For frontend deployment, Render Static Site can be used with the following settings:
+```text
+GET    /api/projects
+POST   /api/projects
+GET    /api/projects/:projectId
+PUT    /api/projects/:projectId
+DELETE /api/projects/:projectId
+```
 
+### Project Members
+
+```text
+GET    /api/projects/:projectId/members
+POST   /api/projects/:projectId/members
+DELETE /api/projects/:projectId/members/:memberId
+```
+
+### Tasks
+
+```text
+GET    /api/tasks/:projectId
+POST   /api/tasks/:projectId
+GET    /api/tasks/task/:taskId
+PUT    /api/tasks/task/:taskId
+DELETE /api/tasks/task/:taskId
+GET    /api/tasks/dashboard/stats
+```
+
+## Deployment
+
+The backend is deployed on Render and uses MongoDB Atlas for the database.
+
+For frontend deployment on Render Static Site:
+
+```text
 Root Directory: frontend
 Build Command: npm install && npm run build
 Publish Directory: build
+```
 
-Frontend environment variable:
+Set the frontend environment variable: https://team-task-manager-full-stack-4.onrender.com/
 
+```env
 REACT_APP_API_URL=https://team-task-manager-full-stack-3.onrender.com
+```
 
-React Router rewrite rule:
+For React Router, add this rewrite rule:
 
+```text
 Source Path: /*
 Destination Path: /index.html
 Action: Rewrite
+```
 
-After frontend deployment, the backend CORS_ORIGIN variable should be updated with the deployed frontend URL.
-
-## How To Use The Application
-
-1. Open the frontend URL.
-2. Register a new user account.
-3. Log in using the registered email and password.
-4. Create a new project.
-5. Add registered team members to the project.
-6. Create tasks under the project.
-7. Assign tasks to project members.
-8. Update task status as work progresses.
-9. View dashboard statistics and overdue tasks.
+After frontend deployment, update the backend `CORS_ORIGIN` value with the deployed frontend URL.
 
 ## Author
 
