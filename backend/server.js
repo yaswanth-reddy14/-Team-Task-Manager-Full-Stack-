@@ -11,10 +11,12 @@ const app = express();
 const databaseUrl = process.env.DATABASE_URL || process.env.MONGODB_URI || process.env.MONGO_URL;
 let databaseConnectionPromise = null;
 
-const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000')
+const defaultAllowedOrigins = ['http://localhost:3000'];
+const configuredAllowedOrigins = (process.env.CORS_ORIGIN || '')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
+const allowedOrigins = new Set([...defaultAllowedOrigins, ...configuredAllowedOrigins]);
 
 const connectDatabase = async () => {
   if (!databaseUrl) {
@@ -40,7 +42,7 @@ const connectDatabase = async () => {
 // Middleware
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.has(origin)) {
       return callback(null, true);
     }
 

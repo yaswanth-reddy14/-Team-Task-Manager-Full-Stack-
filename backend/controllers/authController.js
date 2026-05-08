@@ -15,6 +15,10 @@ const loginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+const getJwtOptions = () => ({
+  expiresIn: process.env.JWT_EXPIRE || '7d',
+});
+
 const register = async (req, res) => {
   try {
     const { error, value } = registerSchema.validate(req.body);
@@ -46,7 +50,7 @@ const register = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE }
+      getJwtOptions()
     );
 
     res.status(201).json({
@@ -89,7 +93,7 @@ const login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE }
+      getJwtOptions()
     );
 
     res.json({
