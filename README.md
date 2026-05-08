@@ -1,372 +1,196 @@
-# Team Task Manager - Full Stack Application
+# Team Task Manager - Full Stack Web Application
 
-A comprehensive web application for team project management with task assignment, progress tracking, and role-based access control.
+## Project Title
 
-## 🚀 Features
+Team Task Manager
 
-- **Authentication**: Secure signup/login with JWT tokens
-- **Project Management**: Create, manage, and organize projects
-- **Team Management**: Add team members with role-based access (Admin/Member)
-- **Task Management**: Create tasks, assign to team members, track status and priority
-- **Dashboard**: Overview of tasks, status breakdown, and overdue task alerts
-- **Role-Based Access Control**: Admin and Member roles with specific permissions
-- **Real-time Status Tracking**: Update task status (To Do/In Progress/Completed)
-- **Responsive Design**: Mobile-friendly interface
+## Project Description
 
-## 🛠️ Tech Stack
+Team Task Manager is a full-stack web application built for managing team projects and tasks. It allows users to register, log in, create projects, add team members, assign tasks, update task status, and track progress using a dashboard.
 
-### Backend
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Database**: MongoDB with Mongoose
-- **Authentication**: JWT (jsonwebtoken)
-- **Validation**: Joi
-- **Security**: bcryptjs for password hashing
+The application includes secure authentication, protected routes, project management, team member management, task assignment, and dashboard statistics.
+
+## Live Backend URL
+
+https://team-task-manager-full-stack-3.onrender.com
+
+## Live Frontend URL
+
+Frontend URL will be added after frontend deployment.
+
+## GitHub Repository
+
+https://github.com/yaswanth-reddy14/-Team-Task-Manager-Full-Stack-
+
+## Tech Stack
 
 ### Frontend
-- **Framework**: React 18
-- **Routing**: React Router v6
-- **HTTP Client**: Axios
-- **Styling**: CSS3
-- **State Management**: React Context API
 
-## 📋 Prerequisites
+- React.js
+- React Router
+- Axios
+- CSS
 
-- Node.js >= 14.0.0
-- MongoDB locally, in Docker, or a MongoDB Atlas/Railway connection string
-- npm or yarn
+### Backend
 
-## 🚀 Quick Start
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcryptjs
+- Joi Validation
+- CORS
 
-### 1. Clone and Setup
+### Deployment
 
-```bash
-# Navigate to project
-cd Assignment
+- Backend deployed on Render
+- Frontend can be deployed on Render Static Site
+- Database hosted using MongoDB Atlas
 
-# Install dependencies
-cd backend && npm install
-cd ../frontend && npm install
-cd ..
-```
+## Main Features
 
-### 2. Database Setup
+- User registration
+- User login
+- JWT-based authentication
+- Protected frontend routes
+- Create projects
+- View project list
+- Edit and delete projects
+- Add registered users as project members
+- Create tasks inside projects
+- Assign tasks to team members
+- Update task status
+- Set task priority
+- Track overdue tasks
+- Dashboard statistics
+- Role-based project access
 
-```bash
-# Copy environment variables
-cp backend/.env.example backend/.env
+## API Base URL
 
-# Update backend/.env with your MongoDB connection string
-DATABASE_URL=mongodb://localhost:27017/task_manager
+https://team-task-manager-full-stack-3.onrender.com
 
-# Run migrations
-cd backend
-npm run migrate
-cd ..
-```
-
-### 3. Start Development Servers
-
-**Terminal 1 - Backend:**
-```bash
-cd backend
-npm run dev
-```
-
-**Terminal 2 - Frontend:**
-```bash
-cd frontend
-npm start
-```
-
-Access the app at `http://localhost:3000`
-
-## 🐳 Docker Setup
-
-### Using Docker Compose
-
-```bash
-# Copy environment files
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
-
-# Build and start all services
-docker-compose up -d
-
-# Run migrations
-docker-compose exec backend npm run migrate
-
-# Access
-# Frontend: http://localhost:3000
-# API: https://team-task-manager-full-stack-3.onrender.com
-# Database: localhost:27017
-```
-
-## 🚢 Railway Deployment
-
-### Prerequisites
-- Railway account (https://railway.app)
-- GitHub repository
-
-### Step 1: Create Railway Project
-
-1. Go to [Railway Dashboard](https://railway.app/dashboard)
-2. Click "New Project"
-3. Connect your GitHub repository
-
-### Step 2: Add MongoDB Service
-
-1. Click "Add Services"
-2. Select "Database" -> "MongoDB"
-3. Railway will automatically set `DATABASE_URL`
-
-### Step 3: Deploy Backend
-
-1. Add "New Service"
-2. Select "GitHub Repo" (select this repo)
-3. Set root directory to `backend`
-4. Configure environment variables:
-   ```
-   NODE_ENV=production
-   JWT_SECRET=<generate-strong-secret>
-   JWT_EXPIRE=7d
-   CORS_ORIGIN=<frontend-railway-url>
-   ```
-
-### Step 4: Deploy Frontend
-
-1. Add "New Service"
-2. Select "GitHub Repo"
-3. Set root directory to `frontend`
-4. Build command: `npm run build`
-5. Start command: `npm start`
-6. Configure environment variables:
-   ```
-   REACT_APP_API_URL=<backend-railway-url>
-   ```
-
-### Step 5: Connect Services
-
-1. In Railway dashboard, link Frontend to Backend
-2. Update CORS_ORIGIN to frontend Railway URL
-3. Deploy all services
-
-## 📝 API Endpoints
+## Important API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/profile` - Get user profile (Protected)
+
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/profile
 
 ### Projects
-- `GET /api/projects` - List user projects (Protected)
-- `POST /api/projects` - Create project (Protected)
-- `GET /api/projects/:projectId` - Get project details (Protected)
-- `PUT /api/projects/:projectId` - Update project (Protected)
-- `DELETE /api/projects/:projectId` - Delete project (Protected)
-- `GET /api/projects/:projectId/members` - Get project members (Protected)
-- `POST /api/projects/:projectId/members` - Add member (Protected)
-- `DELETE /api/projects/:projectId/members/:memberId` - Remove member (Protected)
+
+- GET /api/projects
+- POST /api/projects
+- GET /api/projects/:projectId
+- PUT /api/projects/:projectId
+- DELETE /api/projects/:projectId
+
+### Project Members
+
+- GET /api/projects/:projectId/members
+- POST /api/projects/:projectId/members
+- DELETE /api/projects/:projectId/members/:memberId
 
 ### Tasks
-- `GET /api/tasks/:projectId` - List tasks (Protected)
-- `POST /api/tasks/:projectId` - Create task (Protected)
-- `GET /api/tasks/task/:taskId` - Get task details (Protected)
-- `PUT /api/tasks/task/:taskId` - Update task (Protected)
-- `DELETE /api/tasks/task/:taskId` - Delete task (Protected)
-- `GET /api/tasks/dashboard/stats` - Get dashboard statistics (Protected)
 
-## 🔐 Role-Based Access Control
+- GET /api/tasks/:projectId
+- POST /api/tasks/:projectId
+- GET /api/tasks/task/:taskId
+- PUT /api/tasks/task/:taskId
+- DELETE /api/tasks/task/:taskId
+- GET /api/tasks/dashboard/stats
 
-### Admin Role
-- Create projects
-- Manage project members
-- Delete projects
-- Assign tasks
-- View all team tasks
+## Environment Variables
 
-### Member Role
-- Create tasks in assigned projects
-- Update own task status
-- View assigned tasks
-- Collaborate on projects
+### Backend
 
-## 📊 Database Schema
+NODE_ENV=production
+PORT=5000
+DATABASE_URL=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRE=7d
+CORS_ORIGIN=your_frontend_url
 
-### Users Table
-- `id`: Primary key
-- `email`: Unique email
-- `password`: Hashed password
-- `username`: Unique display name
-- `role`: Admin or Member
-- `created_at`: Account creation timestamp
+### Frontend
 
-### Projects Table
-- `id`: Primary key
-- `name`: Project name
-- `description`: Project description
-- `owner_id`: Reference to user (project owner)
-- `created_at`: Creation timestamp
+REACT_APP_API_URL=https://team-task-manager-full-stack-3.onrender.com
 
-### Project Members Table
-- `id`: Primary key
-- `project_id`: Reference to project
-- `user_id`: Reference to user
-- `role`: Admin or Member
+## Local Setup Instructions
 
-### Tasks Table
-- `id`: Primary key
-- `project_id`: Reference to project
-- `title`: Task title
-- `description`: Task description
-- `status`: TODO/In Progress/Completed
-- `priority`: Low/Medium/High
-- `assigned_to`: Reference to assigned user
-- `created_by`: Reference to creator
-- `due_date`: Task deadline
-- `created_at`: Creation timestamp
+### Backend Setup
 
-## 🧪 Testing API Locally
+1. Open the backend folder.
+2. Install dependencies:
 
-### Using cURL
+   npm install
 
-```bash
-# Register
-curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "user@example.com",
-    "password": "password123",
-    "username": "john"
-  }'
+3. Create a .env file with the required backend environment variables.
+4. Start the backend:
 
-# Login
-curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "user@example.com",
-    "password": "password123"
-  }'
+   npm run dev
 
-# Create Project (replace TOKEN with actual token)
-curl -X POST https://team-task-manager-full-stack-3.onrender.com/api/projects \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer TOKEN" \
-  -d '{
-    "name": "Q4 Planning",
-    "description": "Q4 roadmap and planning"
-  }'
-```
+Backend runs locally on:
 
-## 🐛 Troubleshooting
+http://localhost:5000
 
-### Database Connection Issues
-- Ensure MongoDB is running
-- Verify `DATABASE_URL` in `.env`
-- Check MongoDB credentials
+### Frontend Setup
 
-### JWT Errors
-- Verify `JWT_SECRET` is set
-- Check token hasn't expired
-- Ensure token is in Authorization header: `Bearer <token>`
+1. Open the frontend folder.
+2. Install dependencies:
 
-### CORS Issues
-- Update `CORS_ORIGIN` in backend .env
-- Ensure frontend URL matches
+   npm install
 
-### Docker Issues
-```bash
-# Clear Docker cache
-docker system prune -a
+3. Create a .env file:
 
-# Rebuild images
-docker-compose build --no-cache
+   REACT_APP_API_URL=http://localhost:5000
 
-# View logs
-docker-compose logs -f backend
-```
+4. Start the frontend:
 
-## 📚 Project Structure
+   npm start
 
-```
-Assignment/
-├── backend/
-│   ├── config/
-│   │   └── database.js
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── projectController.js
-│   │   └── taskController.js
-│   ├── middleware/
-│   │   └── auth.js
-│   ├── routes/
-│   │   ├── auth.js
-│   │   ├── projects.js
-│   │   └── tasks.js
-│   ├── migrations/
-│   │   └── migrate.js
-│   ├── server.js
-│   ├── schema.sql
-│   ├── package.json
-│   ├── Dockerfile
-│   └── .env.example
-├── frontend/
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Dashboard.js
-│   │   │   ├── Login.js
-│   │   │   ├── Projects.js
-│   │   │   ├── ProjectDetail.js
-│   │   │   └── Register.js
-│   │   ├── context/
-│   │   │   └── AuthContext.js
-│   │   ├── styles/
-│   │   │   ├── Auth.css
-│   │   │   ├── Dashboard.css
-│   │   │   └── global.css
-│   │   ├── App.js
-│   │   ├── index.js
-│   │   ├── ProtectedRoute.js
-│   │   └── api.js
-│   ├── package.json
-│   ├── Dockerfile
-│   └── .env.example
-├── docker-compose.yml
-├── railway.yml
-└── README.md
-```
+Frontend runs locally on:
 
-## 🤝 Contributing
+http://localhost:3000
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+## Deployment Details
 
-## 📄 License
+The backend is deployed on Render as a Web Service.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Backend deployment URL:
 
-## 📞 Support
+https://team-task-manager-full-stack-3.onrender.com
 
-For issues and questions:
-1. Check the [Troubleshooting](#troubleshooting) section
-2. Review API documentation
-3. Check logs: `docker-compose logs -f`
+For frontend deployment, Render Static Site can be used with the following settings:
 
-## ✅ Deployment Checklist
+Root Directory: frontend
+Build Command: npm install && npm run build
+Publish Directory: build
 
-Before deploying to production:
-- [ ] Set strong `JWT_SECRET`
-- [ ] Configure production database
-- [ ] Set correct `CORS_ORIGIN`
-- [ ] Enable HTTPS
-- [ ] Set `NODE_ENV=production`
-- [ ] Review security settings
-- [ ] Test all API endpoints
-- [ ] Test authentication flow
-- [ ] Verify role-based access control
-- [ ] Set up monitoring/logging
+Frontend environment variable:
+
+REACT_APP_API_URL=https://team-task-manager-full-stack-3.onrender.com
+
+React Router rewrite rule:
+
+Source Path: /*
+Destination Path: /index.html
+Action: Rewrite
+
+After frontend deployment, the backend CORS_ORIGIN variable should be updated with the deployed frontend URL.
+
+## How To Use The Application
+
+1. Open the frontend URL.
+2. Register a new user account.
+3. Log in using the registered email and password.
+4. Create a new project.
+5. Add registered team members to the project.
+6. Create tasks under the project.
+7. Assign tasks to project members.
+8. Update task status as work progresses.
+9. View dashboard statistics and overdue tasks.
+
+## Author
+
+Yaswanth Reddy
